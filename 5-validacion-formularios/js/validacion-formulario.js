@@ -9,36 +9,78 @@ function prepareValidation() {
 
   formul.addEventListener('submit', validar);
 
+  // function validar(e) {
+  //   //deleteFeedback();
+  //   e.preventDefault();
+  //   var f = this;
+
+  //   //if(validateName(f.nombre.value)) {
+  //   if(! validateName(f.nombre.value)) {
+  //     feedbackMessage('El nombre no es válido');
+  //     return false;
+  //   }
+  //   //es que no me salí por el anterior return = el nombre sí era valido
+  //   if(! validateEmail(f.email.value)) {
+  //     feedbackMessage('el email es inválido');
+  //     return false;
+  //   }
+  //   if(f.sexo.value == '') {
+  //     feedbackMessage('Por favor introduce el sexo XD');
+  //     return false;
+  //   }
+  //   //feedbackMessage(typeof f.utilizacion.value)
+  //   if(f.utilizacion.value === '0') {
+  //     feedbackMessage('indica tu utilización del servicio');
+  //     return false;
+  //   }
+  //   //if(f.privacidad.checked == false) {
+  //   if(! f.privacidad.checked) {
+  //     feedbackMessage('no has aceptado...');
+  //     return false;
+  //   }
+    
+
+  //   //si el formulario es correcto
+  //   //document.forms.formulname.submit();
+  //   //formul.submit();
+  //   //this.submit();
+  //   f.submit();
+  // }
+  
+
+
   function validar(e) {
     //deleteFeedback();
     e.preventDefault();
     var f = this;
 
+    var arrayErrores = [];
+
     //if(validateName(f.nombre.value)) {
     if(! validateName(f.nombre.value)) {
-      feedbackMessage('El nombre no es válido');
-      return false;
+      arrayErrores.push('El nombre ' + f.nombre.value + ' no es válido');
     }
     //es que no me salí por el anterior return = el nombre sí era valido
     if(! validateEmail(f.email.value)) {
-      feedbackMessage('el email es inválido');
-      return false;
+      arrayErrores.push('el email es inválido');
     }
     if(f.sexo.value == '') {
-      feedbackMessage('Por favor introduce el sexo XD');
-      return false;
+      arrayErrores.push('Por favor introduce el sexo XD');
     }
-    //feedbackMessage(typeof f.utilizacion.value)
+    //arrayErrores.push(typeof f.utilizacion.value)
     if(f.utilizacion.value === '0') {
-      feedbackMessage('indica tu utilización del servicio');
-      return false;
+      arrayErrores.push('indica tu utilización del servicio');
     }
     //if(f.privacidad.checked == false) {
     if(! f.privacidad.checked) {
-      feedbackMessage('no has aceptado...');
-      return false;
+      arrayErrores.push('no has aceptado...');
     }
     
+    //comprobar si es correcto
+    if(arrayErrores.length != 0) {
+      feedbackSomeMessages(arrayErrores);
+      return false;
+    }
 
     //si el formulario es correcto
     //document.forms.formulname.submit();
@@ -46,7 +88,8 @@ function prepareValidation() {
     //this.submit();
     f.submit();
   }
-  
+
+
 }
 
 
@@ -56,7 +99,7 @@ function validateEmail(email) {
 }
 
 function validateName(name) {
-  if(typeof name != 'string' || name.length < 2 ) {
+  if(typeof name != 'string' || name.length < 2 || name.length > 50) {
     return false;
   }
   return true;
@@ -67,13 +110,23 @@ function feedbackMessage(msg) {
     clearTimeout(window.temporizador);
   }
   var msgElement = document.getElementById('message');
-  msgElement.textContent = msg;
+  msgElement.innerHTML = msg;
   msgElement.style.display = 'block';
 
   window.temporizador = setTimeout(function() {
     msgElement.style.display = 'none';
   }, 5000);
 
+}
+
+function feedbackSomeMessages(arrayErrores) {
+  var cadenaErrores = '<ul>';
+  for(var i in arrayErrores) {
+    cadenaErrores += '<li>' + arrayErrores[i] + '</li>';
+  }
+  cadenaErrores += '</ul>';
+
+  feedbackMessage(cadenaErrores);
 }
 
 function deleteFeedback() {

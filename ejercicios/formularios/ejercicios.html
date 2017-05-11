@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ejercicios formularios</title>
+</head>
+<body>
+  <form action="#" id="form">
+    Edad: <input type="text" name="edad">
+    <br>
+    DNI: <input type="text" name="dni">
+    <br>
+    <button>Enviar</button>
+  </form>
+
+  <script>
+  document.getElementById('form').addEventListener('submit', validateForm);
+
+  function validateForm(e) {
+    e.preventDefault();
+
+    var f = this;
+    if(! validarEdad(f.edad.value)) {
+      console.log(f.edad.value, 'edad no es válida');
+    }
+    if(! validarDNI(f.dni.value)) {
+      console.log(f.dni.value, 'DNI no es válido');
+    } else {
+      console.log(f.dni.value, 'DNI SI es válido');
+    }
+  }
+
+  function validarEdad(edad) {
+    var edadNumerica = parseInt(edad);
+    if(isNaN(edadNumerica)) {
+      return false;
+    }
+    if(edadNumerica < 0 || edadNumerica > 150) {
+      return false;
+    }
+    return true;
+  } 
+
+  function validarDNI(dni) {
+    if(dni.length < 5 || dni.length > 15) {
+      return false;
+    }
+    // /([a-zA-Z0-9]{5,15})/
+    //como ejercicio se puede hacer algo como: var validos = "1234567890abcdefABC";
+    
+    var exr = /[a-zA-Z0-9]+/;
+    if(! exr.test(dni)) {
+      return false;
+    }
+    return true;
+  }
+
+  </script>
+</body>
+</html>
