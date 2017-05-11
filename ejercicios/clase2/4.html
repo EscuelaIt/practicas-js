@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>edad</title>
+</head>
+<body>
+  
+  <script>
+  
+  var valoresNumericos = [1, 5.7, 3, 5, 'ff', 6];
+  console.log(comprovarNumericos(valoresNumericos));
+
+  function comprovarNumericos(arrayValores) {
+    for(var i in arrayValores) {
+      console.log('Voy a comprobar ', valoresNumericos[i]);
+      if(typeof arrayValores[i] != 'number') {
+        return false;
+      }
+    }
+    return true;
+  }
+  </script>
+
+</body>
+</html>

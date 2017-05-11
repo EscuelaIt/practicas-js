@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>edad</title>
+</head>
+<body>
+  
+  <script>
+  
+  var valoresNumericos = [];
+  console.log('minimo:', minimo(valoresNumericos));
+  console.log('maximo:', maximo(valoresNumericos));
+
+  function minimo(arrayValores) {
+    if(! comprobarValidez(arrayValores)) {
+      return false;
+    }
+    var minimo = arrayValores[0];
+    for(var i=1; i<arrayValores.length; i++) {
+      if(arrayValores[i] < minimo) {
+        minimo = arrayValores[i];
+      }
+    }
+    return minimo;
+  }
+
+  function maximo(arrayValores) {
+    if(! comprobarValidez(arrayValores)) {
+      return false;
+    }
+    var maximo = arrayValores[0];
+    for(var i=1; i<arrayValores.length; i++) {
+      if(arrayValores[i] > maximo) {
+        maximo = arrayValores[i];
+      }
+    }
+    return maximo;
+  }
+  
+  function comprovarNumericos(arrayValores) {
+    for(var i in arrayValores) {
+      console.log('Voy a comprobar ', valoresNumericos[i]);
+      if(typeof arrayValores[i] != 'number') {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function comprobarValidez(arrayValores) {
+    if(! arrayValores || ! arrayValores.length) {
+      console.log('no he recibido un valor válido como parámetro')
+      return false;
+    }
+    if(! comprovarNumericos(valoresNumericos)) {
+      console.log('No eran numéricos');
+      return false;
+    } 
+    return true;
+  } 
+  </script>
+
+</body>
+</html>

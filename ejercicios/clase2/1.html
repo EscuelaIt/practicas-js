@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Calculadora</title>
+</head>
+<body>
+  <input type="text" id="operando1" size="4">
+  <button id="suma">+</button>
+  <button id="resta">-</button>
+  <button id="multiplicacion">x</button>
+  <button id="division">/</button>
+  <input type="text" id="operando2" size="4">
+  =
+  <input type="text" id="resultado" size="4">
+
+
+
+  <script>
+  document.getElementById('suma').addEventListener('click', suma);
+  document.getElementById('resta').addEventListener('click', resta);
+  document.getElementById('multiplicacion').addEventListener('click', multiplicacion);
+  document.getElementById('division').addEventListener('click', division);
+
+  function suma(e) {
+    var operandos = recibirOperandos();
+    var resultado = Number(operandos.op1) + Number(operandos.op2);
+    mostrarResultado(resultado);
+  }
+
+  function resta() {
+    var operandos = recibirOperandos();
+    var resultado = Number(operandos.op1) - Number(operandos.op2);
+    mostrarResultado(resultado);
+  }
+
+  function multiplicacion() {
+    var operandos = recibirOperandos();
+    var resultado = Number(operandos.op1) * Number(operandos.op2);
+    mostrarResultado(resultado);
+  }
+
+  function division() {
+    var operandos = recibirOperandos();
+    var resultado = Number(operandos.op1) / Number(operandos.op2);
+    resultado = redondearDosDecimales(resultado);
+    mostrarResultado(resultado);
+  }
+
+  function recibirOperandos() {
+    return {
+      op1: document.getElementById('operando1').value,
+      op2: document.getElementById('operando2').value
+    }
+  }
+
+  function mostrarResultado(resultado) {
+    if(isNaN(resultado)){
+      alert('Esa operación no se puede...')
+    } else {
+      document.getElementById('resultado').value = resultado;
+    }
+  }
+
+  function redondearDosDecimales(valor) {
+    return Math.round(valor * 100) / 100
+  }
+
+  </script>
+
+</body>
+</html>

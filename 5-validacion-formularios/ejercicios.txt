@@ -1,0 +1,29 @@
+Funciones nuevas para validación
+================================
+
+1.- Solicita una edad y valida que sea: 
+- número, 
+- entre 0 y 150 
+
+2.- Solicita un DNI y verifica: 
+- contiene solo letras y números. 
+- Tiene entre 5 y 15 caracteres
+
+3.- Solicita unos comentarios (textarea) y valida:
+- Admite no escribir nada
+- Si se escribe algo, debe contener al menos 20 caracteres
+
+4.- Solicita un campo clave y valida
+- Que tenga al menos 1 letra
+- Que tenga al menos 1 número
+- Que sea al menos de 6 caracteres de larga
+
+5.- Solicita el campo "repetir clave" y valida
+- Que sea igual a la otra clave indicada
+
+Mostrar errores de validación
+================================
+
+6.- Que te muestre todos los errores de una sola vez, en vez de error a error.
+
+7.- Que te muestre los errores al lado del campo que da el problema

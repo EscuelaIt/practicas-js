@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <title>Validación de formularios</title>
+</head>
+<body>
+  <div class="content">
+    <nav>
+      <a href="index.html">Index</a>
+    </nav>
+    <h1>Envíe sus comentarios de nuestro servicio</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo voluptatum sunt repudiandae illo omnis voluptatibus, accusantium fuga, commodi, nam repellendus eaque aspernatur minus alias deleniti in suscipit maiores totam labore?</p>
+    <form action="http://localhost:3000" method="post" id="formulid" name="formulname">
+      <p>
+        <label for="nombre">Nombre</label>
+        <span class="campo">
+        <input type="text" name="nombre" size="25" maxlength="100" value="miguel">
+        </span>
+      </p>
+      <p>
+        <label for="email">Email</label>
+        <span class="campo">
+        <input type="text" name="email" size="25" maxlength="100" value="m@m.es">
+        </span>
+      </p>
+      <p>
+        <label for="sexo">Sexo</label>
+        <span class="campo">
+        <input type="radio" name="sexo" value="Varon"> Hombre
+        <input type="radio" name="sexo" value="Hembra"> Mujer
+        </span>
+      </p>
+      <p>
+        <label for="utilizacion">Frecuencia del viaje</label>
+        <span class="campo">
+        <select name="utilizacion">
+          <option value="0">Seleccionar
+          <option value="1">Varias veces al dia
+          <option value="2">Una vez al dia
+          <option value="3">Varias veces a la semana
+          <option value="4">varias veces al mes
+        </select>
+        </span>
+      </p>
+      <p>
+        <span class="campo">
+          <input type="checkbox" name="privacidad"> 
+          Aceptar la política de privacidad
+        </span>
+      </p>
+      <p>
+        <input type="submit" value="Enviar formulario">
+      </p>
+    </div>
+    <p id="message" class="errormessage">
+
+    </p>
+  </form>
+
+  <div id="message" class="errormessage"></div>
+
+  <script src="../bower_components/cookies-js/dist/cookies.js"></script>
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="js/cookies.js"></script>
+  <script src="js/validacion-formulario.js"></script>
+</body>
+</html>

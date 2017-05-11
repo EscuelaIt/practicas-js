@@ -1,0 +1,22 @@
+{
+  "name": "js-practico",
+  "homepage": "https://github.com/EscuelaIt/practicas-js",
+  "authors": [
+    "Miguel Angel Alvarez <malvarez@desarrolloweb.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "cookies-js": "^1.2.3",
+    "jquery": "^3.2.1"
+  }
+}
