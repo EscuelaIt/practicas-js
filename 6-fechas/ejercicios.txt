@@ -1,0 +1,18 @@
+Con las funciones de JS "vanilla"
+==================================
+- Sacar la fecha con el formato "23 de febrero de 2001"
+- Obtener el timestamp actual
+
+Con la librería pikaday
+==================================
+Haz un formulario con dos campos de fecha
+Valida que la fecha del primer campo sea anterior a la del segundo
+Define un formato de fecha MySQL (2017-05-12)
+
+Con MomentJS
+==================================
+Lista los días que tiene este mes
+En la lista de los días, que aparezca el día actual marcado
+Usando pickaday selecciona una fecha y al elegir el valor, copiarlo en un campo al lado añadiendo 3 días.
+Define un horario que puede estar en cualquier uso diferente al tuyo y conviértelo a tu huso horario https://momentjs.com/timezone/
+

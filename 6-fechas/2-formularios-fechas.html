@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>formularios y fechas</title>
+</head>
+<body>
+  <input type="date" id="html5date">
+  <button id="verDate">Ver la fecha</button>
+
+  <script>
+  document.getElementById('verDate').addEventListener('click', function() {
+    console.log(document.getElementById('html5date').value)
+  });
+  </script>
+
+
+  <hr>
+
+  <input type="text" id="jquerydatepicker">
+  <button id="verDate2">Ver la fecha</button>
+  
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/datetimepicker/build/jquery.datetimepicker.full.js"></script>
+  <link rel="stylesheet" href="../bower_components/datetimepicker/build/jquery.datetimepicker.min.css">
+  <script>
+  $('#jquerydatepicker').datetimepicker();
+
+  document.getElementById('verDate2').addEventListener('click', function() {
+    console.log(document.getElementById('jquerydatepicker').value)
+  });
+  </script>
+
+  <p>
+    Hora: <input type="text" id="solohora">
+    <br>
+    Fecha: <input type="text" id="solofecha">
+  </p>
+
+  <script>
+  $('#solohora').datetimepicker({
+    datepicker: false,
+    format:'H:i'
+  });
+  
+  $('#solofecha').datetimepicker({
+    timepicker: false,
+    format:'m/d/Y'    
+  });
+  </script>
+
+  <hr>
+
+  <input type="text" id="pickaday">
+  <script src="../bower_components/moment/moment.js"></script>
+  <link rel="stylesheet" href="../bower_components/pikaday/css/pikaday.css">
+  <script src="../bower_components/pikaday/pikaday.js"></script>
+
+  <script>
+  var picker = new Pikaday({
+    field: document.getElementById('pickaday'),
+    i18n: {
+      previousMonth : 'Anterior',
+      nextMonth     : 'Siguiente',
+      months        : ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+      weekdays      : ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+      weekdaysShort : ['Dom','Lun','Mar','Mie','Jue','Vie','Sáb'],
+    },
+    firstDay: 1,
+    format: 'DD/MM/YYYY',
+    onSelect: function(fecha) {
+      console.log('seleccionaste:', fecha, moment(fecha).format('DD/MM/YYYY'));
+    }
+  });
+  </script>
+
+
+</body>
+</html>

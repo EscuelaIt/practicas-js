@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Moment</title>
+</head>
+<body>
+
+  <script src="../bower_components/moment/moment.js"></script>
+  <script src="../bower_components/moment/locale/es.js"></script>
+  <script>
+  var fecha  = moment('2017-01-12');
+  console.log(fecha);
+  console.log(fecha.format('DD/MM/YYYY'));
+  console.log(fecha.format('D [de] MMMM [de] YYYY'));
+  console.log(fecha.fromNow());
+  console.log(fecha.valueOf());
+  console.log(fecha.unix());
+
+  var fecha2 = moment.unix(1894186400);
+  console.log(fecha2.format('DD/MM/YYYY'));
+  
+  fecha.add('29', 'days');
+  console.log(fecha.format('DD/MM/YYYY'));
+  </script>
+
+  <script src="../bower_components/moment-timezone/builds/moment-timezone-with-data-2012-2022.js"></script>
+  <script>
+  var ahora = moment();
+  var zonaMadrid = ahora.tz('Europe/Madrid').format('HH:mm:ss');
+  console.log(zonaMadrid);
+
+  var a = moment.tz("2013-11-18 11:55", "Europe/Madrid");
+  console.log(a.tz('America/Sao_Paulo').format('HH:mm:ss'));
+
+  </script>
+</body>
+</html>

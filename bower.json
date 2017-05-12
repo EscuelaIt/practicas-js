@@ -17,6 +17,10 @@
   ],
   "dependencies": {
     "cookies-js": "^1.2.3",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "datetimepicker": "^2.5.4",
+    "pikaday": "^1.5.1",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13"
   }
 }
