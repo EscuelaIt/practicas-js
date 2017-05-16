@@ -1,0 +1,5 @@
+1.- Implementar un aviso "cargando..." en el flujo del fetch
+
+2.- En el ejercicio de validación de formularios, clase 5
+Implementar el envío del formulario por ajax usando jQuery.
+

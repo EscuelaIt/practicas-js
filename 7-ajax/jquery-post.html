@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ajax con jQuery</title>
+  <style>
+  .cargando {
+    background-image: url('spinner.gif');
+    background-repeat: no-repeat;
+    height: 16px;
+    margin-top: 10px;    
+  }
+  </style>
+</head>
+<body>
+  
+  <form action="http://localhost:3000" id="formul">
+    Nombre: <input type="text" name="nombre" value="Miguel" id="nombreid">
+    <br>
+    Edad: <input type="text" name="edad" value="42">
+    <br>
+    <input type="submit" value="Enviar">
+  </form>
+
+  <div id="mensaje"></div>
+
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script>
+  $(function() {
+    $('#formul').on('submit', function(e) {
+      e.preventDefault();
+      var f = $(this);
+      var url = f.attr('action');
+      $('#mensaje').addClass('cargando');
+      
+      var data = f.serialize();
+
+      var respuesta = function(res) {
+        $('#mensaje').html(res);
+      }
+      var error = function() {
+        $('#mensaje').text('Se ha producido un error');
+      }
+      var siempre = function() {
+        console.log('Se ejecuta en caso de error y éxito');
+        $('#mensaje').removeClass('cargando');
+      }
+
+      $.post(url, data)
+        .done(respuesta)
+        .fail(error)
+        .always(siempre);
+    });
+    
+  });
+  </script>
+</body>
+</html>

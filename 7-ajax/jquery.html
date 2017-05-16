@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ajax con jQuery</title>
+</head>
+<body>
+  
+  <a href="#" id="enlace">Cargar algo con Ajax y jQuery</a>
+  <div id="mensaje"></div>
+
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script>
+  $(function() {
+    $('#enlace').on('click', function(e) {
+      e.preventDefault();
+
+      $('#mensaje').load('test.txt');
+    });
+  });
+  </script>
+</body>
+</html>

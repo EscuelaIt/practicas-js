@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>fetch</title>
+</head>
+<body>
+  
+  <button id="btn">Hacer una conexión con Ajax</button>
+  <p id="respuesta"></p>
+
+
+  <script src="./load-script.js"></script>
+  <script>
+  
+  document.addEventListener('DOMContentLoaded', initialize);
+
+  function initialize() {
+    if(! window.fetch) {
+      loadScript('./polyfills.js', configureAjaxCalls);
+    } else {
+      configureAjaxCalls();
+    }
+  }
+
+  function configureAjaxCalls() {
+    document.getElementById('btn').addEventListener('click', btnClickHandler);
+  }
+
+  function btnClickHandler() {
+    fetch('test.tx')
+      .then(ajaxPositive)
+      .then(showResult)
+      .catch(showError);
+
+    
+    function ajaxPositive(response) {
+      console.log(response.ok);
+      if(response.ok) {
+        console.log('ha ido bien', response.status);
+        return response.text();
+      } else {
+        console.log('status', response.status); 
+        return Promise.reject('no he podido recibir bien ese archivo (status ' + response.status + ')')     
+      }
+    }
+
+    function showResult(txt) {
+      console.log('muestro respuesta: ', txt);
+      if(txt) {
+        var resElement = document.getElementById('respuesta');
+        resElement.textContent = txt;
+        resElement.style.color = 'blue';
+      }
+    }
+
+    function showError(err) { 
+      console.log('muestor error', err);
+      var resElement = document.getElementById('respuesta');
+      resElement.textContent = 'Hubo un error: ' + err;
+      resElement.style.color = 'red';
+    }
+    
+
+    // fetch('test.txt')
+    //   .then(function(response) {
+    //     //código a ejecutar en el caso positivo
+    //     console.log('todo bien');
+    //     response.text()
+    //       .then(function(texto){
+    //         console.log(texto);
+    //         document.getElementById('respuest').innerHTML = texto;
+    //       })
+    //       .catch(function(err) {
+    //         document.getElementById('respuesta').textContent = 'Otro error...' + err;
+    //       });
+    //   })
+    //   .catch(function(err) {
+    //     //código a ejecutar en caso de error
+    //     console.log('Algo va mal... ' + err)
+    //   });
+  }
+
+
+
+  </script>
+
+</body>
+</html>
