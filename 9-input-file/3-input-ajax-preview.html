@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>input element</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <input type="file" id="fileElement"> <button id="uploadBtn">Upload</button>
+  <span id="fileMsg"></span>
+
+  <script src="validate-helper.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var fileElement = document.getElementById('fileElement');
+    var fileMsg = document.getElementById('fileMsg');
+
+
+    fileElement.addEventListener('change', imagePreview);
+
+    function imagePreview() {
+      var files = fileElement.files;
+      if(verifyFile(files)) {
+        readImg(fileElement.files[0]);
+      }
+    }
+
+    function readImg(file) {
+      var reader = new FileReader();
+      reader.addEventListener('load', function() {
+        //console.log(reader.result);
+        var previewImage = document.getElementById('imagepreview');
+        if(previewImage) {
+          previewImage.remove();
+        }
+        var image = document.createElement('img');
+        image.setAttribute('src', reader.result);
+        image.setAttribute('id', 'imagepreview');
+        document.body.appendChild(image);
+      });
+      reader.readAsDataURL(file);
+    }
+
+    //creación de un evento
+    document.getElementById('uploadBtn').addEventListener('click', uploadFile);
+
+    function uploadFile() {
+      fileMsg.textContent = '';
+      var files = fileElement.files;
+      if(verifyFile(files)) {
+        console.log('voy a subir...');
+        var formData = new FormData();
+        formData.append('file', files[0]);
+
+        //envío por ajax
+        fetch('http://localhost:3000/upload', {
+          method: 'post',
+          body: formData
+        })
+          .then(ajaxPositive)
+          .then(showFeedback)
+          .catch(showError);
+      }
+    }
+
+    function ajaxPositive(res) {
+        if(res.ok) {
+          return res.json();
+        } else {
+          return Promise.reject('No se ha recibido una respuesta positiva del servidor')
+        }
+    }
+
+    function showFeedback(data) {
+      if(data.uploaded) {
+        fileMsg.textContent = 'Archivo cargado';
+      } else {
+        showError('Error: ' + data.error);
+      }
+    }
+
+    function showError(err) {
+      fileMsg.textContent = err;
+    }
+
+
+    function verifyFile(files) {
+      
+      console.log(files.length);
+      if(! files.length) {
+        fileMsg.textContent = 'Debes seleccionar un archivo';
+        return false;
+      }
+      console.log(files[0]);
+      if(! validateHelper.validateFileType(files[0].type)) {
+        fileMsg.textContent = 'Permitidos jpg, png y gif';
+        return false;
+      }
+      if(! validateHelper.validateMaxFileSize(files[0].size)) {
+        fileMsg.textContent = 'Archivo muy grande';
+        return false;
+      }
+      return true;
+    }
+
+  });
+
+  </script>
+</body>
+</html>

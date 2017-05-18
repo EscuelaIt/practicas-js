@@ -5,8 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>input element</title>
+  <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-  
+  <input type="file" id="fileElement">
+  <span id="fileMsg"></span>
+
+  <script src="validate-helper.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var fileElement = document.getElementById('fileElement');
+    var fileMsg = document.getElementById('fileMsg');
+
+    //creación de un evento
+    fileElement.addEventListener('change', verifyFile);
+
+    function verifyFile() {
+      var files = fileElement.files;
+      console.log(files.length);
+      if(! files.length) {
+        fileMsg.textContent = 'Debes seleccionar un archivo';
+        return false;
+      }
+      console.log(files[0]);
+      if(! validateHelper.validateFileType(files[0].type)) {
+        fileMsg.textContent = 'Permitidos jpg, png y gif';
+        return false;
+      }
+      if(! validateHelper.validateMaxFileSize(files[0].size)) {
+        fileMsg.textContent = 'Archivo muy grande';
+        return false;
+      }
+    }
+  });
+
+
+  </script>
 </body>
 </html>

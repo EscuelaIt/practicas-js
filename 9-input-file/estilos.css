@@ -1,0 +1,9 @@
+body {
+  font-family: sans-serif;
+}
+
+#fileMsg {
+  display: block;
+  margin: 10px 0 6px 3px;
+  font-size: .8em;
+}
