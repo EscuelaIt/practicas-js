@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>fetch post</title>
+</head>
+<body>
+  <form action="http://localhost:3000" id="formul" method="post">
+  Nombre: <input type="text" name="nombre" value="Miguel">
+  <br>
+  Edad: <input type="text" name="edad" value="42">
+  <br>
+  <input type="submit" value="Enviar">
+  </form>
+
+  <div id="respuesta"></div>
+  
+  <script src="./load-script.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', initialize);
+
+  function initialize() {
+    //compruebo si dispongo de fetch
+    if(! window.fetch) {
+      console.log('no tengo fetch, debo cargar los polyfills');
+      loadScript('./polyfills.js', configureAjaxCalls);
+    } else {
+      console.log('Sí dispongo de fetch');
+      configureAjaxCalls();
+    }
+  }
+
+  function configureAjaxCalls() {
+    document.getElementById('formul').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('respuesta').textContent = '';
+      var f = this;
+      var formData = '';
+      formData += 'nombre=' + f.elements.nombre.value;
+      formData += '&edad=' + f.elements.edad.value;
+      fetch(f.action, {
+        method: 'post',
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+        },
+        body: formData
+      })
+        .then(ajaxPositive)
+        .then(showResult)
+        .catch(showError);
+    });
+
+
+    function ajaxPositive(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        return response.text();
+      } else {
+        return Promise.reject('status code: ' + response.status);
+      }
+    }
+
+    function showResult(txt) {
+      console.log('muestro respuesta: ', txt);
+      if(txt) {
+        var resElement = document.getElementById('respuesta');
+        resElement.textContent = txt;
+        resElement.style.color = 'blue';
+      }
+    }
+
+    function showError(err) { 
+      console.log('muestor error', err);
+      var resElement = document.getElementById('respuesta');
+      resElement.textContent = 'Hubo un error: ' + err;
+      resElement.style.color = 'red';
+    }
+    
+  }
+  </script>
+</body>
+</html>

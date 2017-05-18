@@ -1,0 +1,21 @@
+article.post {
+  font-size: 0.8em;
+  margin: 20px;
+  padding: 15px;
+  border: 2px solid #acf;
+  background-color: #ceefff;
+  border-radius: 5px;
+  font-family: sans-serif;
+}
+article.post h2 {
+  margin-top: 0;
+  color: #369;
+}
+article.post p {
+  color: #888;
+}
+
+section.comments, section.comments p {
+  font-size: 0.9em;
+  color: #369;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jquery post</title>
+  <style>
+    article.post {
+      margin: 20px;
+      padding: 15px;
+      border: 2px solid #acf;
+      background-color: #ceefff;
+      border-radius: 5px;
+      font-family: sans-serif;
+    }
+    article.post h2 {
+      margin-top: 0;
+      color: #369;
+    }
+    article.post p {
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div id="post"></div>
+
+  id: <input type="text" size="2" value="1" id="idpost">
+  <button id="cargarjson">Cargar JSON</button>
+
+  
+  
+  
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script>
+  $(function() {
+    $('#cargarjson').on('click', function(e) {
+      e.preventDefault();
+      var idPost = document.getElementById('idpost').value;
+      var respuesta = function(data) {
+        console.log(data)
+        var postElement = $('<article></article>');
+        postElement.addClass('post');
+        postElement.html('<h2>' + data.title + '</h2><p>' + data.body + '</p>');
+        console.log(postElement)
+        $('#post').append(postElement);
+      }
+      //realizamos la conexión Ajax
+      $.get('https://jsonplaceholder.typicode.com/posts/' + idPost, respuesta, 'json');
+    });
+  })
+  
+  </script>
+</body>
+</html>

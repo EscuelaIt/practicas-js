@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>fetch</title>
+  <style>
+    article.post {
+      margin: 20px;
+      padding: 15px;
+      border: 2px solid #cdd;
+      background-color: #eef5f5;
+      border-radius: 5px;
+      font-family: sans-serif;
+    }
+    article.post h2 {
+      margin-top: 0;
+      color: #369;
+    }
+    article.post p {
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  
+  
+  <p id="respuesta"></p>
+
+  id: <input type="text" size="2" value="1" id="idpost">
+  <button id="btn">recibir el post</button>
+
+  <script src="../7-ajax/load-script.js"></script>
+  <script>
+  
+  document.addEventListener('DOMContentLoaded', initialize);
+
+  function initialize() {
+    if(! window.fetch) {
+      loadScript('../7-ajax/polyfills.js', configureAjaxCalls);
+    } else {
+      configureAjaxCalls();
+    }
+  }
+
+  function configureAjaxCalls() {
+    document.getElementById('btn').addEventListener('click', btnClickHandler);
+  }
+
+  function btnClickHandler() {
+    var idPost = document.getElementById('idpost').value;
+    fetch('https://jsonplaceholder.typicode.com/posts/' + idPost)
+      .then(ajaxPositive)
+      .then(showResult)
+      .catch(showError);
+
+    
+    function ajaxPositive(response) {
+      console.log(response.ok);
+      if(response.ok) {
+        console.log('ha ido bien', response.status);
+        return response.json();
+      } else {
+        console.log('status', response.status); 
+        return Promise.reject('no he podido recibir bien ese archivo (status ' + response.status + ')')     
+      }
+    }
+
+    function showResult(data) {
+      console.log('muestro respuesta: ', data);
+      if(data) {
+        var resElement = document.getElementById('respuesta');
+        
+        //producir HTML
+        var postElement = document.createElement('article');
+        postElement.classList.add('post');
+        postElement.innerHTML = '<h2>' + data.title + '</h2><p>' + data.body + '</p>';
+        var listElement = document.createElement('ul');
+        var listItem1 = document.createElement('li');
+        listItem1.innerHTML = 'Id Post: <b>' + data.id + '</b>';
+        var listItem2 = document.createElement('li')
+        listItem2.textContent = 'Id User:' + data.userId;
+        listElement.appendChild(listItem1);
+        listElement.appendChild(listItem2);
+        postElement.appendChild(listElement);
+        resElement.appendChild(postElement);
+      }
+    }
+
+    function showError(err) { 
+      console.log('muestor error', err);
+      var resElement = document.getElementById('respuesta');
+      resElement.textContent = 'Hubo un error: ' + err;
+      resElement.style.color = 'red';
+    }
+
+  }
+
+
+
+  </script>
+
+</body>
+</html>

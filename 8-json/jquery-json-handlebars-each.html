@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jquery post</title>
+  <link rel="stylesheet" href="./estilos.css">
+</head>
+<body>
+  <div id="post"></div>
+
+  id: <input type="text" size="2" value="1" id="idpost">
+  <button id="cargarjson">Cargar JSON</button>
+
+  
+  
+  
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/handlebars/handlebars.js"></script>
+  <script>
+  $(function() {
+
+    var template;
+    $.get('./post-template2.html', function(res) {
+      template = Handlebars.compile(res);
+    });
+
+    var templateComments;
+    $.get('./comments-template.html', function(res) {
+      console.log(res);
+      templateComments = Handlebars.compile(res);
+    });
+
+    //delegated events
+    $('#post').on('click', 'a.vercoments', function(e) {
+      e.preventDefault();
+      var enlace = $(this);
+      var idPost = enlace.data('idpost');
+      console.log('se ha producido un clic en el enlace del post ', idPost);
+      var respuestaComentario = function(data) {
+        console.log(data);
+        var html = templateComments({
+          comments: data
+        });
+        console.log(html);
+        enlace.parent().append(html);
+      }
+      $.get('https://jsonplaceholder.typicode.com/posts/' + idPost + '/comments', respuestaComentario, 'json');
+    });
+
+
+    $('#cargarjson').on('click', function(e) {
+      e.preventDefault();
+      var idPost = document.getElementById('idpost').value;
+      var respuesta = function(data) {
+        console.log(data);
+        var html = template(data);
+        $('#post').append(html);
+      }
+      //realizamos la conexión Ajax
+      $.get('https://jsonplaceholder.typicode.com/posts/' + idPost, respuesta, 'json');
+    });
+  })
+  
+  </script>
+</body>
+</html>

@@ -23,6 +23,7 @@
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
     "fetch": "^2.0.3",
-    "promise-polyfill": "^6.0.2"
+    "promise-polyfill": "^6.0.2",
+    "handlebars": "^4.0.8"
   }
 }

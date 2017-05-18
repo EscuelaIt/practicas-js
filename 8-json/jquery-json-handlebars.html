@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jquery post</title>
+  <link rel="stylesheet" href="./estilos.css">
+</head>
+<body>
+  <div id="post"></div>
+
+  id: <input type="text" size="2" value="1" id="idpost">
+  <button id="cargarjson">Cargar JSON</button>
+
+  
+  
+  
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/handlebars/handlebars.js"></script>
+
+  <!--<script type="text/x-handlebars-template" id="template">
+    <article class="post">
+      <h2>{{title}}</h2>
+      <p>{{body}}</p>
+      <ul>
+        <li>Id Post: <br><i>{{id}}</i></li>
+        <li>Id Usuario: <br><b>{{userId}}</b></li>
+      </ul>
+    </article>
+  </script>-->
+
+  <script>
+  $(function() {
+
+    //compilamos la plantilla
+    // var templateText = document.getElementById('template').innerHTML;
+    // var template = Handlebars.compile(templateText);
+
+    var template;
+    $.get('./post-template.html', function(res) {
+      template = Handlebars.compile(res);
+    });
+
+    $('#cargarjson').on('click', function(e) {
+      e.preventDefault();
+      var idPost = document.getElementById('idpost').value;
+      var respuesta = function(data) {
+        console.log(data);
+        var html = template(data);
+        $('#post').append(html);
+      }
+      //realizamos la conexión Ajax
+      $.get('https://jsonplaceholder.typicode.com/posts/' + idPost, respuesta, 'json');
+    });
+  })
+  
+  </script>
+</body>
+</html>
