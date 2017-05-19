@@ -1,0 +1,68 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="comment-item.html">
+
+
+<dom-module id="post-item">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      article {
+        font-size: 0.8em;
+        margin: 20px;
+        padding: 15px;
+        border: 2px solid #acf;
+        background-color: #ceefff;
+        border-radius: 5px;
+        font-family: sans-serif;
+      }
+      h2 {
+        margin-top: 0;
+        color: #369;
+      }
+      p {
+        color: #c88;
+      }
+    </style>
+
+    <iron-ajax
+      id="elajax"
+      url="https://jsonplaceholder.typicode.com/posts/[[data.id]]/comments"
+      handle-as="json"
+      last-response="{{comentarios}}"
+    ></iron-ajax>
+
+    <article>
+      <h2>{{data.title}}</h2>
+      <p>{{data.body}}</p>
+      <ul>
+        <li>Id Post: <i>{{data.id}}</i></li>
+        <li>Id Usuario: <b>{{data.userId}}</b></li>
+      </ul>
+
+      <a href="#" on-tap="cargarComentarios">Ver comentarios</a>
+
+      
+      <template is="dom-repeat" items="[[comentarios]]">
+        <comment-item data="[[item]]"></comment-item>
+      </template>
+      
+    </article>
+  </template>
+  <script>
+    Polymer({
+      is: 'post-item',
+      properties: {
+        data: Object,
+        comentarios: Array
+      },
+
+      cargarComentarios: function(e) {
+        e.preventDefault();
+        this.$.elajax.generateRequest();
+      }
+    });
+  </script>
+</dom-module>

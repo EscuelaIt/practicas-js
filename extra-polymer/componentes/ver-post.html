@@ -1,0 +1,67 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+
+<link rel="import" href="post-item">
+
+
+<dom-module id="ver-post">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      input, button {
+        font-size: 1.2em;
+      }
+    </style>
+
+    <iron-ajax
+       id="elajax"
+       url="https://jsonplaceholder.typicode.com/posts/[[idPost]]"
+       handle-as="json"
+       on-response="handleResponse"
+       loading="{{ajaxLoading}}"
+    ></iron-ajax>
+
+    <input type="text" id="inputPost" size="2"> 
+    <button on-tap="obtenerPost">Obtener Post</button>
+
+    
+    <paper-spinner active="{{ajaxLoading}}"></paper-spinner>
+    
+    
+    <template is="dom-repeat" items="[[posts]]">
+      <post-item data="[[item]]"></post-item>
+    </template>
+    
+
+  </template>
+  <script>
+    Polymer({
+      is: 'ver-post',
+
+      properties: {
+        idPost: Number,
+        posts: {
+          type: Array,
+          value: function() {
+            return [];
+          }
+        },
+        ajaxLoading: Boolean
+      },
+
+      obtenerPost: function() {
+        console.log(this.$.inputPost.value);
+        this.idPost = this.$.inputPost.value;
+        this.$.elajax.generateRequest();
+      },
+
+      handleResponse: function() {
+        console.log(this.$.elajax.lastResponse);
+        this.push('posts', this.$.elajax.lastResponse);
+      }
+    });
+  </script>
+</dom-module>

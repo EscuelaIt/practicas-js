@@ -24,6 +24,9 @@
     "moment-timezone": "^0.5.13",
     "fetch": "^2.0.3",
     "promise-polyfill": "^6.0.2",
-    "handlebars": "^4.0.8"
+    "handlebars": "^4.0.8",
+    "polymer": "^1.9.0",
+    "iron-ajax": "PolymerElements/iron-ajax#^2.0.0",
+    "paper-spinner": "PolymerElements/paper-spinner#^2.0.0"
   }
 }

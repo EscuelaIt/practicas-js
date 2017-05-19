@@ -1,0 +1,63 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+
+<dom-module id="hola-polymer">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      h1 {
+        color: blue;
+        font-size: 14px;
+      }
+      p {
+        font-family: sans-serif;
+      }
+    </style>
+
+    <h1>Hola Polymer</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione recusandae quae consequuntur omnis laboriosam, eveniet blanditiis suscipit voluptate culpa, cupiditate delectus dolorum tempora iusto reprehenderit. Alias laborum nesciunt vel porro!</p>
+    
+    <iron-ajax
+       auto
+       url="https://jsonplaceholder.typicode.com/posts/{{idPost}}"
+       handle-as="json"
+       last-response="{{post}}">
+    </iron-ajax>
+    
+    <h2>{{idPost}}</h2>
+
+    <article class="post">
+      <h2>{{post.title}}</h2>
+      <p>{{post.body}}</p>
+      <ul>
+        <li>Id Post: <i>{{post.id}}</i></li>
+        <li>Id Usuario: <b>{{post.userId}}</b></li>
+      </ul>
+    </article>
+
+    <button on-tap="ver10">ver elemento de id 10</button>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'hola-polymer',
+
+      properties: {
+        post: Object,
+        idPost: {
+          type: Number,
+          value: 4
+        }
+      },
+
+      ver10: function() {
+        this.idPost = 10;
+      }
+    });
+  </script>
+</dom-module>

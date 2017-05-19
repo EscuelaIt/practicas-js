@@ -1,0 +1,31 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="comment-item">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      section {
+        font-size: 0.9em;
+        color: #369;
+      }
+      p {
+        color: #008;
+      }
+    </style>
+    <section>
+      <h3>{{data.name}} - {{data.email}}</h3>
+      <p>{{data.body}}</p>
+    </section>
+  </template>
+  <script>
+    Polymer({
+      is: 'comment-item',
+      properties: {
+        data: Object
+      }
+    });
+  </script>
+</dom-module>
