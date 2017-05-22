@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>scroll en elemento</title>
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+  #cuerpo {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    white-space: nowrap;
+    max-width: '100%'
+  }
+  article.post {
+    width: 250px;
+    background-color: royalblue;
+    padding: 10px; 
+    color: azure;
+    margin-right: 15px;
+  }
+  article.post h2 {
+    margin-top: 5px;
+  }
+ .controlScroll {
+   display: inline-block; padding: 5px;
+   cursor: pointer;
+ } 
+  </style>
+</head>
+<body>
+
+  <div class="insertarContacto">
+    <p>
+    Teléfono:<br>
+    <input type="text" id="numero" value="444 22 11">
+    </p><p>
+    Nombre:<br>
+    <input type="text" id="nombre" value="John Long">
+    </p>
+    <p>
+      <input type="button" id="agregar" value="agregar">
+    </p>
+  </div>
+
+  <div id="cuerpo">
+  </div>
+
+  <div id="izquierda" class="controlScroll">&lt;&lt;&lt;</div>
+  <div id="derecha" class="controlScroll">&gt;&gt;&gt;</div>
+
+  <script src="../bower_components/handlebars/handlebars.js"></script>
+  <script type="text/x-handlebars-template" id="template">
+    <article class="post">
+      <h2>{{nombre}}</h2>
+      <p>Teléfono: {{numero}}</p>
+    </article>
+  </script>
+  <script src="create-elements.js"></script>
+  <script src="scroll-behavior.js"></script>
+</body>
+</html>
