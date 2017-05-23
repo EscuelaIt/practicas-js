@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <title>Validación de formularios</title>
+</head>
+<body>
+  <div class="content">
+    <nav>
+      <a href="index.html">Index</a>
+    </nav>
+    <h1>Envíe sus comentarios de nuestro servicio</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo voluptatum sunt repudiandae illo omnis voluptatibus, accusantium fuga, commodi, nam repellendus eaque aspernatur minus alias deleniti in suscipit maiores totam labore?</p>
+    <form action="http://localhost:3000" method="post" id="formulid" name="formulname">
+      <p>
+        <label for="nombre">Nombre</label>
+        <span class="campo">
+        <input type="text" name="nombre" size="25" maxlength="100" value="miguel">
+        </span>
+      </p>
+      <p>
+        <label for="email">Email</label>
+        <span class="campo">
+        <input type="text" name="email" size="25" maxlength="100" value="m@m.es">
+        </span>
+      </p>
+      <p>
+        <label for="sexo">Sexo</label>
+        <span class="campo">
+        <input type="radio" name="sexo" value="Varon"> Hombre
+        <input type="radio" name="sexo" value="Hembra"> Mujer
+        </span>
+      </p>
+      <p>
+        <label for="utilizacion">Frecuencia del viaje</label>
+        <span class="campo">
+        <select name="utilizacion">
+          <option value="0">Seleccionar
+          <option value="1">Varias veces al dia
+          <option value="2">Una vez al dia
+          <option value="3">Varias veces a la semana
+          <option value="4">varias veces al mes
+        </select>
+        </span>
+      </p>
+      <p>
+        <span class="campo">
+          <input type="checkbox" name="privacidad">
+          Aceptar la política de privacidad
+        </span>
+      </p>
+      <p>
+        <input type="submit" value="Enviar formulario">
+      </p>
+
+  </form>
+
+
+    <p>Dolor maxime assumenda neque cupiditate iste modi, ducimus nisi consequuntur eligendi eveniet impedit amet perferendis dolorum rem, sint totam at numquam a fugiat cum delectus aperiam. Expedita cupiditate sed, aliquam.</p>
+    <p>Asperiores animi modi aut eaque nisi perferendis, ad consequuntur vero quam dicta. Assumenda numquam quaerat tempore beatae magni totam unde, voluptate consequuntur architecto consectetur nulla sapiente, obcaecati officia. Dignissimos, quae.</p>
+    <p>Vel dolor cumque molestias cupiditate asperiores, eius. Sed ea, labore quos fugiat dignissimos quaerat modi eius quisquam cupiditate? Sequi aperiam sint reprehenderit fugiat deleniti vero quo incidunt hic praesentium repellendus!</p>
+    <p>Quo delectus porro dolore saepe aliquam consectetur officia quasi voluptatibus! Nesciunt impedit consequatur omnis repellendus eaque optio dolorem adipisci suscipit a atque alias, voluptas ab sequi debitis dolores explicabo dicta.</p>
+    <p>Accusamus magnam sit iste, voluptatum consequuntur debitis fuga ipsum rem minima dolor, itaque laborum ab accusantium doloremque nihil asperiores tenetur repudiandae, magni delectus dignissimos eveniet a repellendus? Nihil, accusantium, sequi.</p>
+
+  </div>
+  <div id="top"><a href="#" id="toplink">Top</a></div>
+  <div id="message" class="errormessage"></div>
+
+  <script src="js/main-min.js"></script>
+</body>
+</html>
